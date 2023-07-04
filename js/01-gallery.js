@@ -34,13 +34,13 @@ document.querySelector("ul.gallery").onclick = (event) => {
 	`
       )
       .show(basicLightbox);
-    window.addEventListener("keydown", onEscKeyPress);
-    function onEscKeyPress(event) {
-      if (event.code === "Escape") {
-        close((basicLightbox) => {
-          window.removeEventListener("keydown", onEscKeyPress);
-        });
-      }
-    }
+    // window.addEventListener("keydown", onEscKeyPress);
+    // function onEscKeyPress(event) {
+    //   if (event.code === "Escape") {
+    //     close((basicLightbox) => {
+    //       window.removeEventListener("keydown", onEscKeyPress);
+    //     });
+    //   }
+    // }
   }
 };
