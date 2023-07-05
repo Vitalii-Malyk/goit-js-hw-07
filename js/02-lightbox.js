@@ -28,9 +28,10 @@ function showAlt(event) {
   event.preventDefault();
   event.stopPropagation();
   if (event.target.tagName === "IMG") {
-    event.target.title = event.target.alt;
-
-    let gallery = new SimpleLightbox(".gallery a", {});
+    let gallery = new SimpleLightbox(".gallery a", {
+      captionsData: "Alt",
+      captionDelay: 250,
+    });
 
     gallery.on("closed.simplelightbox", function () {
       imageslistEl.removeEventListener("click", showAlt);
