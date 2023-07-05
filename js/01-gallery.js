@@ -23,23 +23,32 @@ const imageslistEl = document.querySelector(".gallery");
 
 imageslistEl.insertAdjacentHTML("beforeend", imagesListArr);
 
-document.querySelector("ul.gallery").onclick = (event) => {
-  event.preventDefault();
-  console.log(event.target.dataset.source);
-  if (event.target.tagName === "IMG") {
-    const instance = basicLightbox.create(
-      `<img width="1250" height="850" src="${event.target.dataset.source}">`
-    );
-    instance.show(basicLightbox);
+imageslistEl.addEventListener("click", openModal);
 
-    window.addEventListener("keydown", onEscKeyPress);
-    function onEscKeyPress(event) {
-      if (event.code === "Escape") {
-        instance.close(() => {
-          window.removeEventListener("keydown", onEscKeyPress);
-          console.log("Знімається прослуховувач");
-        });
-      }
+function openModal(event) {
+  event.preventDefault();
+  const instance = basicLightbox.create(
+    `<img width="1250" height="850" src="${event.target.dataset.source}">`,
+    {
+      onShow: () => {
+        imageslistEl.addEventListener("keydown", EscKeyCLickPress);
+        window.addEventListener("click", EscKeyCLickPress);
+      },
+      onClose: () => {
+        imageslistEl.removeEventListener("keydown", EscKeyCLickPress);
+        window.removeEventListener("click", EscKeyCLickPress);
+        console.log("Знято всі прослуховувачі");
+      },
+    }
+  );
+
+  instance.show();
+
+  function EscKeyCLickPress(event) {
+    if (event.code !== "Escape" || !instance) {
+      return;
+    } else {
+      instance.close();
     }
   }
-};
+}
