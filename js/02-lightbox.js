@@ -26,7 +26,6 @@ imageslistEl.addEventListener("click", showAlt);
 
 function showAlt(event) {
   event.preventDefault();
-  event.stopPropagation();
   if (event.target.tagName === "IMG") {
     let gallery = new SimpleLightbox(".gallery a", {
       captionsData: "Alt",

@@ -27,20 +27,19 @@ document.querySelector("ul.gallery").onclick = (event) => {
   event.preventDefault();
   console.log(event.target.dataset.source);
   if (event.target.tagName === "IMG") {
-    basicLightbox
-      .create(
-        `
-		<img width="1250" height="850" src="${event.target.dataset.source}">
-	`
-      )
-      .show(basicLightbox);
-    // window.addEventListener("keydown", onEscKeyPress);
-    // function onEscKeyPress(event) {
-    //   if (event.code === "Escape") {
-    //     close((basicLightbox) => {
-    //       window.removeEventListener("keydown", onEscKeyPress);
-    //     });
-    //   }
-    // }
+    const instance = basicLightbox.create(
+      `<img width="1250" height="850" src="${event.target.dataset.source}">`
+    );
+    instance.show(basicLightbox);
+
+    window.addEventListener("keydown", onEscKeyPress);
+    function onEscKeyPress(event) {
+      if (event.code === "Escape") {
+        instance.close(() => {
+          window.removeEventListener("keydown", onEscKeyPress);
+          console.log("Знімається прослуховувач");
+        });
+      }
+    }
   }
 };
