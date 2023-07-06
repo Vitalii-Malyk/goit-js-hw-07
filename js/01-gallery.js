@@ -31,12 +31,10 @@ function openModal(event) {
     `<img width="1250" height="850" src="${event.target.dataset.source}">`,
     {
       onShow: () => {
-        imageslistEl.addEventListener("keydown", EscKeyCLickPress);
-        window.addEventListener("click", EscKeyCLickPress);
+        imageslistEl.addEventListener("keydown", escKeyCLickPress);
       },
       onClose: () => {
-        imageslistEl.removeEventListener("keydown", EscKeyCLickPress);
-        window.removeEventListener("click", EscKeyCLickPress);
+        imageslistEl.removeEventListener("keydown", escKeyCLickPress);
         console.log("Знято всі прослуховувачі");
       },
     }
@@ -44,7 +42,7 @@ function openModal(event) {
 
   instance.show();
 
-  function EscKeyCLickPress(event) {
+  function escKeyCLickPress(event) {
     if (event.code !== "Escape" || !instance) {
       return;
     } else {
